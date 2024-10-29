@@ -8,7 +8,8 @@
 #include <QLocalSocket>
 #include <QLocalServer>
 #include <QThread>
-
+#include <QStyleHints>
+#include <QStyleFactory>
 #include "3rdparty/RunGuard.hpp"
 #include "main/NekoGui.hpp"
 
@@ -116,7 +117,8 @@ int main(int argc, char* argv[]) {
     // init QApplication
     delete preQApp;
     QApplication a(argc, argv);
-
+    a.setStyle(QStyleFactory::create("Fusion"));
+    a.styleHints()->setColorScheme(Qt::ColorScheme::Dark);
     // dispatchers
     DS_cores = new QThread;
     DS_cores->start();
