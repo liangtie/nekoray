@@ -1143,13 +1143,10 @@ void MainWindow::on_menu_move_triggered() {
 void MainWindow::on_menu_delete_triggered() {
     auto ents = get_now_selected_list();
     if (ents.count() == 0) return;
-    if (QMessageBox::question(this, tr("Confirmation"), QString(tr("Remove %1 item(s) ?")).arg(ents.count())) ==
-        QMessageBox::StandardButton::Yes) {
-        for (const auto &ent: ents) {
-            NekoGui::profileManager->DeleteProfile(ent->id);
-        }
-        refresh_proxy_list();
+    for (const auto &ent: ents) {
+        NekoGui::profileManager->DeleteProfile(ent->id);
     }
+    refresh_proxy_list();
 }
 
 void MainWindow::on_menu_reset_traffic_triggered() {
