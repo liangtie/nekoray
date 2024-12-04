@@ -16,6 +16,7 @@ if (WIN32)
 endif ()
 
 # Find Qt
+set(QT_VERSION_MAJOR 6)
 if (NOT QT_VERSION_MAJOR)
     set(QT_VERSION_MAJOR 5)
 endif ()
