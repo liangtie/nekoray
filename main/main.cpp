@@ -9,9 +9,11 @@
 #include <QLocalServer>
 #include <QThread>
 #include <QStyleHints>
+#include <QSysInfo>
 #include <QStyleFactory>
 #include "3rdparty/RunGuard.hpp"
 #include "main/NekoGui.hpp"
+#include <QOperatingSystemVersion>
 
 #include "ui/mainwindow_interface.h"
 
@@ -117,8 +119,13 @@ int main(int argc, char* argv[]) {
     // init QApplication
     delete preQApp;
     QApplication a(argc, argv);
-    a.setStyle(QStyleFactory::create("Fusion"));
-    a.styleHints()->setColorScheme(Qt::ColorScheme::Dark);
+
+    // Check if Windows 10 or lower
+    if (QOperatingSystemVersion::current() < QOperatingSystemVersion(QOperatingSystemVersion::Windows, 10, 0, 22000)) {
+        a.setStyle(QStyleFactory::create("Fusion"));
+        a.styleHints()->setColorScheme(Qt::ColorScheme::Dark);
+    }
+
     // dispatchers
     DS_cores = new QThread;
     DS_cores->start();
